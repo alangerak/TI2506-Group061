@@ -12,7 +12,7 @@ public class App {
 	public static void main(String[] argv) {
 
 		DAOManager manager = DAOManager.getInstance();
-		Connection connection = manager.getDBConnection();;
+		Connection connection = manager.getDBConnection();
 
 		if (connection != null) {
 			try {
