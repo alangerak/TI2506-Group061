@@ -30,9 +30,14 @@ public class App {
 		System.out.println("	(5) Exit");
 
 		System.out.print("Enter your choice: ");
-
-		int option = Integer.parseInt(inputReader.nextLine());
-
+		int option = 0;
+		try{
+			option = Integer.parseInt(inputReader.nextLine());
+		}
+		catch(NumberFormatException e){
+			System.out.println("Please, input a number from 1-5");
+		}
+		
 		switch (option) {
 		case 1:
 			System.out.println();
@@ -82,9 +87,9 @@ public class App {
 				System.out.println("The Movie: \"" + title + "\" was not found.");
 				System.out.println();
 			} else {
-
+				
 				System.out.println("---------- Movie -----------");
-				System.out.format("%10s%60s%15s%15s%20s%20s%20s", "ID", "Title", "Year", " Number", "Type", "Location",
+				System.out.format("%10s%60s%15s%15s%20s%20s", "ID", "Title", "Year", " Number", "Location",
 						"Language \n");
 				resultMovie.printMovieObject();
 
@@ -109,7 +114,6 @@ public class App {
 			CreateMenu();
 			break;
 		case 3:
-
 			System.out.println();
 			System.out.print("Please enter the first name of the Actor: ");
 			fname = inputReader.nextLine();
@@ -117,13 +121,21 @@ public class App {
 			lname = inputReader.nextLine();
 
 			actortest = new ActorDAO_Postgres();
-			actortest.printFilmography("Arnold", "Schwarzenegger");
-			//actortest.printFilmography(fname, lname);
+			//actortest.printFilmography("Arnold", "Schwarzenegger");
+			actortest.printFilmography(fname, lname);
 					
 			CreateMenu();
 			break;
 		case 4:
+			System.out.println();
+			System.out.print("Please enter the title of the Movie: ");
+			title = inputReader.nextLine();
 
+			movietest = new MovieDAO_Postgres();
+			//movietest.printCast("Terminator Salvation");
+			movietest.printCast(title);
+					
+			CreateMenu();
 			break;
 		case 5:
 
@@ -133,6 +145,7 @@ public class App {
 			break;
 		default:
 
+			CreateMenu();			
 			break;
 		}
 

@@ -9,7 +9,7 @@ public class Movie {
 	private String title;
 	private Year year;
 	private int number;
-	private String type;
+
 	private String location;
 	private String language;
 	private Set<Genre> genres;
@@ -48,14 +48,6 @@ public class Movie {
 
 	public void setNumber(int number) {
 		this.number = number;
-	}
-
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
 	}
 
 	public String getLocation() {
@@ -101,7 +93,7 @@ public class Movie {
 	
 	//Debugging String maybe?
 	public void printMovieObject(){
-		System.out.format("%10d%60s%15s%15s%20s%20s%20s", id, title, year.toString(), number, type,location,language);
+		System.out.format("%10d%60s%15s%15d%20s%20s", id, title, year.toString(), number, location,language);
 		System.out.print("\n");
 	}
 
