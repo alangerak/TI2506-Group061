@@ -11,7 +11,6 @@ public class Actor {
 	private String gender;
 	private int number;
 	private Set<Aka_name> aka_names;
-	private Set<Acted_in> acted_in;
 
 	public Actor() {
 	}
@@ -76,15 +75,6 @@ public class Actor {
 		this.aka_names = aka_names;
 	}
 
-	public Set<Acted_in> getActed_in() {
-		return acted_in;
-	}
-
-	public void setActed_in(Set<Acted_in> acted_in) {
-		this.acted_in = acted_in;
-	}
-	
-	
 	//Debugging String maybe?
 	public void printActorObject(){
 		System.out.format("%10d%20s%15s%30s%20s%15d", id, fname, lname, mname, gender,number);

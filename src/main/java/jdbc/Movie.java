@@ -14,17 +14,6 @@ public class Movie {
 	private String language;
 	private Set<Genre> genres;
 	private Set<Aka_title> aka_titles;
-	private Set<Acted_in> acted_in;
-	
-	
-
-	public Set<Acted_in> getActed_in() {
-		return acted_in;
-	}
-
-	public void setActed_in(Set<Acted_in> acted_in) {
-		this.acted_in = acted_in;
-	}
 
 	public Movie() {
 	}

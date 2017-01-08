@@ -15,19 +15,19 @@ public class ActorDAO_Postgres implements ActorDAO {
 	public Actor getActor(String fname, String lname) {
 		Connection connection = DAOManager.getInstance().getDBConnection();
 		String selectActorSQL = "SELECT * FROM actors WHERE actors.lname=? AND actors.fname=? LIMIT 1";
-			
+
 		Actor actor = new Actor();
 		try {
 			PreparedStatement pstmt = connection.prepareStatement(selectActorSQL);
 			pstmt.setString(1, lname);
 			pstmt.setString(2, fname);
 			ResultSet rs = pstmt.executeQuery();
-		
-			//Check for a result
-			if (!rs.isBeforeFirst() ) {    
-			   return null; 
-			} 
-			
+
+			// Check for a result
+			if (!rs.isBeforeFirst()) {
+				return null;
+			}
+
 			while (rs.next()) {
 				actor.setId(rs.getInt("idactors"));
 				actor.setLname(rs.getString("lname"));
@@ -35,24 +35,22 @@ public class ActorDAO_Postgres implements ActorDAO {
 				actor.setMname(rs.getString("mname"));
 				actor.setGender(rs.getString("gender"));
 				actor.setNumber(rs.getInt("number"));
-				
-				actor.setActed_in(null);
+
 			}
 
-			
 			String selectAka_nameSQL = "SELECT * FROM aka_names WHERE aka_names.idactors=?";
 			pstmt = connection.prepareStatement(selectAka_nameSQL);
 			pstmt.setInt(1, actor.getId());
 			rs = pstmt.executeQuery();
-			
+
 			actor.setAka_names(new HashSet<Aka_name>());
-			
+
 			Map<Integer, Aka_name> aka_namesById = new HashMap<Integer, Aka_name>();
 			while (rs.next()) {
 				Aka_name aka_name = aka_namesById.get(actor.getId());
 				if (aka_name == null) {
 					aka_name = new Aka_name();
-					aka_name.setId(rs.getInt("idaka_names"));	
+					aka_name.setId(rs.getInt("idaka_names"));
 					aka_name.setName(rs.getString("name"));
 					aka_namesById.put(aka_name.getId(), aka_name);
 				}
@@ -66,9 +64,39 @@ public class ActorDAO_Postgres implements ActorDAO {
 		return actor;
 	}
 
-	public void printFilmography(String lname, String fname) {
-		// TODO Auto-generated method stub
+	public void printFilmography(String fname, String lname) {
 
+		// Temp
+		Actor actor = getActor(fname, lname);
+
+		if (actor == null) {
+			System.out.println();
+			System.out.println("The Actor: \"" + fname + " " + lname + "\" was not found.");
+			System.out.println();
+		} else {
+			Connection connection = DAOManager.getInstance().getDBConnection();
+			String selectFilmographySQL = "SELECT * FROM acted_in JOIN movies ON (acted_in.idmovies = movies.idmovies) JOIN actors ON (actors.idactors = acted_in.idactors) WHERE actors.idactors=?";
+
+			try {
+				PreparedStatement pstmt = connection.prepareStatement(selectFilmographySQL);
+				pstmt.setInt(1, actor.getId());
+				ResultSet rs = pstmt.executeQuery();
+
+				// TEMP
+				System.out.println();
+				System.out.format("%15s%100s", "Year:", "Title: \n");
+				while (rs.next()) {
+					// TEMP
+					System.out.format("%15s%100s", rs.getString("year"), rs.getString("title"));
+					System.out.print("\n");
+				}
+				System.out.println();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		}
 	}
 
 }

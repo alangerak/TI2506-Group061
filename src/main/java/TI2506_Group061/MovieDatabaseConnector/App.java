@@ -110,6 +110,17 @@ public class App {
 			break;
 		case 3:
 
+			System.out.println();
+			System.out.print("Please enter the first name of the Actor: ");
+			fname = inputReader.nextLine();
+			System.out.print("Please enter the last name of the Actor: ");
+			lname = inputReader.nextLine();
+
+			actortest = new ActorDAO_Postgres();
+			actortest.printFilmography("Arnold", "Schwarzenegger");
+			//actortest.printFilmography(fname, lname);
+					
+			CreateMenu();
 			break;
 		case 4:
 
