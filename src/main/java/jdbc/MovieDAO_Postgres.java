@@ -77,7 +77,7 @@ public class MovieDAO_Postgres implements MovieDAO {
 	}
 
 	/**
-	 * Helper method to find and add all the aka titles of a movie
+	 * Helper method to find and add the aka titles of a movie
 	 * 
 	 * @param movie
 	 *            the target movie
