@@ -96,6 +96,10 @@ public class Movie {
 	public Set<Aka_title> getAka_titles() {
 		return aka_titles;
 	}
+	
+	public void addAka_title(Aka_title aka_title){
+		aka_titles.add(aka_title);
+	}
 
 	public void setAka_titles(Set<Aka_title> aka_titles) {
 		this.aka_titles = aka_titles;

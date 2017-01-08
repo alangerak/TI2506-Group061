@@ -2,6 +2,7 @@ package TI2506_Group061.MovieDatabaseConnector;
 
 import jdbc.Actor;
 import jdbc.Aka_name;
+import jdbc.Aka_title;
 import jdbc.ActorDAO;
 import jdbc.ActorDAO_Postgres;
 import jdbc.Movie;
@@ -27,11 +28,22 @@ public class App {
 			
 		System.out.println();
 		
+		
+		
+		
 		MovieDAO movietest = new MovieDAO_Postgres();
-		Movie resultMovie = movietest.getMovie("Blade");
+		Movie resultMovie = movietest.getMovie("A Different World");
 		
 		System.out.format("%10s%60s%15s%15s%20s%20s%20s", "ID", "Title", "Year", " Number", "Type","Location","Language \n");
 		resultMovie.printMovieObject();
+		
+		System.out.println();
+		
+		System.out.format("%10s%60s%15s%20s", "ID", "Title", "Year", "Location \n");
+		for(Aka_title resultAka_title: resultMovie.getAka_titles()){
+			resultAka_title.printAka_titleObject();
+		}
+
 		
 	}
 

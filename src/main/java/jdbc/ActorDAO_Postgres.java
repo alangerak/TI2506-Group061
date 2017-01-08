@@ -31,7 +31,6 @@ public class ActorDAO_Postgres implements ActorDAO {
 				actor.setGender(rs.getString("gender"));
 				actor.setNumber(rs.getInt("number"));
 				
-				actor.setAka_names(new HashSet<Aka_name>());
 				actor.setActed_in(null);
 			}
 			
@@ -39,6 +38,8 @@ public class ActorDAO_Postgres implements ActorDAO {
 			pstmt = connection.prepareStatement(selectAka_nameSQL);
 			pstmt.setInt(1, actor.getId());
 			rs = pstmt.executeQuery();
+			
+			actor.setAka_names(new HashSet<Aka_name>());
 			
 			Map<Integer, Aka_name> aka_namesById = new HashMap<Integer, Aka_name>();
 			while (rs.next()) {

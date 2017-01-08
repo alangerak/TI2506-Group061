@@ -43,5 +43,11 @@ public class Aka_title {
 	public void setYear(Year year) {
 		this.year = year;
 	}
+	
+	//Debugging String maybe?
+	public void printAka_titleObject(){
+		System.out.format("%10d%60s%15s%20s", id, title, year.toString(), location);
+		System.out.print("\n");
+	}
 
 }
