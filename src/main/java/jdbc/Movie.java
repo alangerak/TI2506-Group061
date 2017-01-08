@@ -89,7 +89,6 @@ public class Movie {
 	public void setAka_titles(Set<Aka_title> aka_titles) {
 		this.aka_titles = aka_titles;
 	}
-
 	
 	//Debugging String maybe?
 	public void printMovieObject(){

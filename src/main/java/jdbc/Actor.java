@@ -74,7 +74,7 @@ public class Actor {
 	public void setAka_names(Set<Aka_name> aka_names) {
 		this.aka_names = aka_names;
 	}
-
+	
 	//Debugging String maybe?
 	public void printActorObject(){
 		System.out.format("%10d%20s%15s%30s%20s%15d", id, fname, lname, mname, gender,number);
