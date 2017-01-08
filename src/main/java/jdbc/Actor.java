@@ -67,6 +67,10 @@ public class Actor {
 	public Set<Aka_name> getAka_names() {
 		return aka_names;
 	}
+	
+	public void addAka_name(Aka_name aka_name){
+		aka_names.add(aka_name);
+	}
 
 	public void setAka_names(Set<Aka_name> aka_names) {
 		this.aka_names = aka_names;

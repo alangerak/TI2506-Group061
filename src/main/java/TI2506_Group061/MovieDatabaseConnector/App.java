@@ -1,6 +1,7 @@
 package TI2506_Group061.MovieDatabaseConnector;
 
 import jdbc.Actor;
+import jdbc.Aka_name;
 import jdbc.ActorDAO;
 import jdbc.ActorDAO_Postgres;
 import jdbc.Movie;
@@ -16,6 +17,13 @@ public class App {
 		
 		System.out.format("%10s%20s%15s%30s%20s%15s", "ID", "Fname", "Lname", " Mname", "Gender","Number \n");
 		resultActor.printActorObject();
+		
+		System.out.println();
+		
+		System.out.format("%10s%60s", "ID", "Name \n");
+		for(Aka_name resultAka_name: resultActor.getAka_names()){
+			resultAka_name.printAka_nameObject();
+		}
 			
 		System.out.println();
 		

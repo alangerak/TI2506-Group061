@@ -23,5 +23,11 @@ public class Aka_name {
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	//Debugging String maybe?
+	public void printAka_nameObject(){
+		System.out.format("%10d%60s", id, name);
+		System.out.print("\n");
+	}
 
 }

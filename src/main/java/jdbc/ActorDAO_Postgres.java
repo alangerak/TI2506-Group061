@@ -4,6 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
 
 import TI2506_Group061.MovieDatabaseConnector.DAOManager;
 
@@ -12,7 +15,7 @@ public class ActorDAO_Postgres implements ActorDAO {
 	public Actor getActor(String lname, String fname) {
 		Connection connection = DAOManager.getInstance().getDBConnection();
 		String selectActorSQL = "SELECT * FROM actors WHERE actors.lname=? AND actors.fname=? LIMIT 1";
-
+			
 		Actor actor = new Actor();
 		try {
 			PreparedStatement pstmt = connection.prepareStatement(selectActorSQL);
@@ -28,6 +31,25 @@ public class ActorDAO_Postgres implements ActorDAO {
 				actor.setGender(rs.getString("gender"));
 				actor.setNumber(rs.getInt("number"));
 				
+				actor.setAka_names(new HashSet<Aka_name>());
+				actor.setActed_in(null);
+			}
+			
+			String selectAka_nameSQL = "SELECT * FROM aka_names WHERE aka_names.idactors=?";
+			pstmt = connection.prepareStatement(selectAka_nameSQL);
+			pstmt.setInt(1, actor.getId());
+			rs = pstmt.executeQuery();
+			
+			Map<Integer, Aka_name> aka_namesById = new HashMap<Integer, Aka_name>();
+			while (rs.next()) {
+				Aka_name aka_name = aka_namesById.get(actor.getId());
+				if (aka_name == null) {
+					aka_name = new Aka_name();
+					aka_name.setId(rs.getInt("idaka_names"));	
+					aka_name.setName(rs.getString("name"));
+					aka_namesById.put(aka_name.getId(), aka_name);
+				}
+				actor.addAka_name(aka_name);
 			}
 
 		} catch (SQLException e) {
