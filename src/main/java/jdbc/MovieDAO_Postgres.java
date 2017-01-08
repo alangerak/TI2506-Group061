@@ -54,6 +54,25 @@ public class MovieDAO_Postgres implements MovieDAO {
 				}
 				movie.addAka_title(aka_title);
 			}
+			
+			String selectGenreSQL = "SELECT * FROM genres JOIN movies_genres ON movies_genres.idgenres = genres.idgenres WHERE movies_genres.idmovies=?";
+			pstmt = connection.prepareStatement(selectGenreSQL);
+			pstmt.setInt(1, movie.getId());
+			rs = pstmt.executeQuery();
+
+			movie.setGenres(new HashSet<Genre>());
+			
+			Map<Integer, Genre> genresById = new HashMap<Integer, Genre>();
+			while (rs.next()) {
+				Genre genre = genresById.get(movie.getId());
+				if (genre == null) {
+					genre = new Genre();
+					genre.setId(rs.getInt("idgenres"));
+					genre.setGenre(rs.getString("genre"));
+					genresById.put(genre.getId(), genre);
+				}
+				movie.addGengre(genre);
+			}			
 
 		} catch (SQLException e) {
 			e.printStackTrace();

@@ -22,5 +22,11 @@ public class Genre {
 	public void setGenre(String genre) {
 		this.genre = genre;
 	}
+	
+	//Debugging String maybe?
+	public void printGenreObject(){
+		System.out.format("%10d%60s", id, genre);
+		System.out.print("\n");
+	}
 
 }

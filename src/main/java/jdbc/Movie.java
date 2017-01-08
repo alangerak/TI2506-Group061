@@ -89,6 +89,10 @@ public class Movie {
 		return genres;
 	}
 
+	public void addGengre(Genre genre){
+		genres.add(genre);
+	}
+	
 	public void setGenres(Set<Genre> genres) {
 		this.genres = genres;
 	}
