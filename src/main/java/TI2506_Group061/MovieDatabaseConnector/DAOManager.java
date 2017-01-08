@@ -12,6 +12,7 @@ public class DAOManager {
 	private final String DB_PASSWORD = "password";
 
 	private static DAOManager instance = null;
+	private Connection dbConnection = null;
 
 	protected DAOManager() {
 	}
@@ -24,29 +25,29 @@ public class DAOManager {
 	}
 
 	public Connection getDBConnection() {
-		System.out.println("..... PostgreSQL JDBC setting up connection .... ");
-		Connection dbConnection = null;
+		if (dbConnection == null) {
+			System.out.println("..... PostgreSQL JDBC setting up connection .... ");
 
-		System.out.print("DB Driver loading");
-		try {
-			Class.forName(DB_DRIVER);
-			System.out.print("\t\t [OK] \n");
-		} catch (ClassNotFoundException e) {
-			System.out.print("\t\t [Failed] \n");
-			//e.printStackTrace();
+			System.out.print("DB Driver loading");
+			try {
+				Class.forName(DB_DRIVER);
+				System.out.print("\t\t [OK] \n");
+			} catch (ClassNotFoundException e) {
+				System.out.print("\t\t [Failed] \n");
+				// e.printStackTrace();
+			}
+
+			System.out.print("Connecting to DB");
+			try {
+				dbConnection = DriverManager.getConnection(DB_CONNECTION, DB_USER, DB_PASSWORD);
+				System.out.print("\t\t [OK] \n");
+				return dbConnection;
+			} catch (SQLException e) {
+				System.out.print("\t\t [Failed] \n");
+				// e.printStackTrace();
+
+			}
 		}
-
-		System.out.print("Connecting to DB");
-		try {
-			dbConnection = DriverManager.getConnection(DB_CONNECTION, DB_USER, DB_PASSWORD);
-			System.out.print("\t\t [OK] \n");
-			return dbConnection;
-		} catch (SQLException e) {
-			System.out.print("\t\t [Failed] \n");
-			//e.printStackTrace();
-
-		}
-
 		return dbConnection;
 	}
 
