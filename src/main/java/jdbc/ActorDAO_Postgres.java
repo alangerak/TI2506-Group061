@@ -12,7 +12,7 @@ import TI2506_Group061.MovieDatabaseConnector.DAOManager;
 
 public class ActorDAO_Postgres implements ActorDAO {
 
-	public Actor getActor(String lname, String fname) {
+	public Actor getActor(String fname, String lname) {
 		Connection connection = DAOManager.getInstance().getDBConnection();
 		String selectActorSQL = "SELECT * FROM actors WHERE actors.lname=? AND actors.fname=? LIMIT 1";
 			
@@ -22,7 +22,12 @@ public class ActorDAO_Postgres implements ActorDAO {
 			pstmt.setString(1, lname);
 			pstmt.setString(2, fname);
 			ResultSet rs = pstmt.executeQuery();
-
+		
+			//Check for a result
+			if (!rs.isBeforeFirst() ) {    
+			   return null; 
+			} 
+			
 			while (rs.next()) {
 				actor.setId(rs.getInt("idactors"));
 				actor.setLname(rs.getString("lname"));
@@ -33,6 +38,7 @@ public class ActorDAO_Postgres implements ActorDAO {
 				
 				actor.setActed_in(null);
 			}
+
 			
 			String selectAka_nameSQL = "SELECT * FROM aka_names WHERE aka_names.idactors=?";
 			pstmt = connection.prepareStatement(selectAka_nameSQL);

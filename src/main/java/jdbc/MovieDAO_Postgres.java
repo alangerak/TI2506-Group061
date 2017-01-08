@@ -23,6 +23,11 @@ public class MovieDAO_Postgres implements MovieDAO {
 			pstmt.setString(1, title);
 			ResultSet rs = pstmt.executeQuery();
 
+			//Check for a result
+			if (!rs.isBeforeFirst() ) {    
+			   return null; 
+			} 
+			
 			while (rs.next()) {
 
 				movie.setId(rs.getInt("idmovies"));

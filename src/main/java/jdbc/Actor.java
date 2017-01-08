@@ -87,7 +87,7 @@ public class Actor {
 	
 	//Debugging String maybe?
 	public void printActorObject(){
-		System.out.format("%10d%20s%15s%30s%20s%15d", id, lname, fname, mname, gender,number);
+		System.out.format("%10d%20s%15s%30s%20s%15d", id, fname, lname, mname, gender,number);
 		System.out.print("\n");
 	}
 
