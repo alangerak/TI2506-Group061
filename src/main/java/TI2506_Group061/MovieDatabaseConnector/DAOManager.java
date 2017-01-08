@@ -4,6 +4,10 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+/**
+ * The DAOManager sets up and maintains a connection to the Postgres database
+ *
+ */
 public class DAOManager {
 
 	private final String DB_DRIVER = "org.postgresql.Driver";
@@ -17,6 +21,10 @@ public class DAOManager {
 	protected DAOManager() {
 	}
 
+	/**
+	 * Get the DAOManager
+	 * @return the DAOManager
+	 */
 	public static DAOManager getInstance() {
 		if (instance == null) {
 			instance = new DAOManager();
@@ -24,6 +32,10 @@ public class DAOManager {
 		return instance;
 	}
 
+	/**
+	 * Get a connection to the Database. It will instantiate it only once.
+	 * @return Connection
+	 */
 	public Connection getDBConnection() {
 		if (dbConnection == null) {
 			System.out.println("..... PostgreSQL JDBC setting up connection .... ");
