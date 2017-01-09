@@ -1,4 +1,4 @@
-package TI2506_Group061.MovieDatabaseConnector;
+package jdbc;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

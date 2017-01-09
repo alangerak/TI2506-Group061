@@ -7,8 +7,6 @@ import java.sql.SQLException;
 import java.time.Year;
 import java.util.HashSet;
 
-import TI2506_Group061.MovieDatabaseConnector.DAOManager;
-
 /**
  * Implementation of MovieDAO using PostgreSQL.
  *

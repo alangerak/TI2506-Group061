@@ -6,8 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashSet;
 
-import TI2506_Group061.MovieDatabaseConnector.DAOManager;
-
 public class ActorDAO_Postgres implements ActorDAO {
 
 	/**
