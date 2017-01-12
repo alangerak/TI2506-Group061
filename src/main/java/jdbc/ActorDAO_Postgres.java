@@ -6,6 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashSet;
 
+/**
+ * The Class ActorDAO_Postgres.
+ */
 public class ActorDAO_Postgres implements ActorDAO {
 
 	/**
@@ -97,7 +100,6 @@ public class ActorDAO_Postgres implements ActorDAO {
 	 */
 	public void printFilmography(String fname, String lname) {
 
-		// Temp
 		Actor actor = getActor(fname, lname);
 
 		if (actor == null) {
@@ -113,11 +115,11 @@ public class ActorDAO_Postgres implements ActorDAO {
 				pstmt.setInt(1, actor.getId());
 				ResultSet rs = pstmt.executeQuery();
 
-				// TEMP
+				//Print HEader
 				System.out.println();
 				System.out.format("%15s%100s", "Year:", "Title: \n");
+				//Print result
 				while (rs.next()) {
-					// TEMP
 					System.out.format("%15s%100s", rs.getString("year"), rs.getString("title"));
 					System.out.print("\n");
 				}

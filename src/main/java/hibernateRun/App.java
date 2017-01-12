@@ -1,6 +1,17 @@
-package jdbc;
+package hibernateRun;
 
 import java.util.Scanner;
+
+import hibernate.Actor;
+import hibernate.ActorDAO;
+import hibernate.ActorDAO_Postgres;
+import hibernate.Aka_name;
+import hibernate.Aka_title;
+import hibernate.DAOManager;
+import hibernate.Genre;
+import hibernate.Movie;
+import hibernate.MovieDAO;
+import hibernate.MovieDAO_Postgres;
 
 public class App {
 
@@ -21,13 +32,12 @@ public class App {
 
 		System.out.print("Enter your choice: ");
 		int option = 0;
-		try{
+		try {
 			option = Integer.parseInt(inputReader.nextLine());
-		}
-		catch(NumberFormatException e){
+		} catch (NumberFormatException e) {
 			System.out.println("Please, input a number from 1-5");
 		}
-		
+
 		switch (option) {
 		case 1:
 			System.out.println();
@@ -37,9 +47,8 @@ public class App {
 			String lname = inputReader.nextLine();
 
 			ActorDAO actortest = new ActorDAO_Postgres();
-			// Actor resultActor = actortest.getActor("Schwarzenegger",
-			// "Arnold");
-			Actor resultActor = actortest.getActor(fname, lname);
+			Actor resultActor = actortest.getActor("Arnold", "Schwarzenegger");
+			// Actor resultActor = actortest.getActor(fname, lname);
 
 			if (resultActor == null) {
 				System.out.println();
@@ -49,14 +58,15 @@ public class App {
 				System.out.println();
 				System.out.println("---------- Actor -----------");
 				System.out.format("%10s%20s%15s%30s%20s%15s", "ID", "Fname", "Lname", " Mname", "Gender", "Number \n");
-				resultActor.printActorObject();
+
+				PrintObjects.printActorObject(resultActor);
 
 				System.out.println();
 
 				System.out.println("---------- Aka names -----------");
 				System.out.format("%10s%60s", "ID", "Name \n");
 				for (Aka_name resultAka_name : resultActor.getAka_names()) {
-					resultAka_name.printAka_nameObject();
+					PrintObjects.printAka_nameObject(resultAka_name);
 				}
 
 				System.out.println();
@@ -69,26 +79,26 @@ public class App {
 			String title = inputReader.nextLine();
 
 			MovieDAO movietest = new MovieDAO_Postgres();
-			// Movie resultMovie = movietest.getMovie("A Different World");
-			Movie resultMovie = movietest.getMovie(title);
+			Movie resultMovie = movietest.getMovie("A Different World");
+			// Movie resultMovie = movietest.getMovie(title);
 
 			if (resultMovie == null) {
 				System.out.println();
 				System.out.println("The Movie: \"" + title + "\" was not found.");
 				System.out.println();
 			} else {
-				
+
 				System.out.println("---------- Movie -----------");
 				System.out.format("%10s%60s%15s%15s%20s%20s", "ID", "Title", "Year", " Number", "Location",
 						"Language \n");
-				resultMovie.printMovieObject();
+				PrintObjects.printMovieObject(resultMovie);
 
 				System.out.println();
 
 				System.out.println("---------- Aka titles -----------");
 				System.out.format("%10s%60s%15s%20s", "ID", "Title", "Year", "Location \n");
 				for (Aka_title resultAka_title : resultMovie.getAka_titles()) {
-					resultAka_title.printAka_titleObject();
+					PrintObjects.printAka_titleObject(resultAka_title);
 				}
 
 				System.out.println();
@@ -96,7 +106,7 @@ public class App {
 				System.out.println("---------- Genres -----------");
 				System.out.format("%10s%60s", "ID", "Genre \n");
 				for (Genre resultGenre : resultMovie.getGenres()) {
-					resultGenre.printGenreObject();
+					PrintObjects.printGenreObject(resultGenre);
 				}
 
 				System.out.println();
@@ -111,9 +121,9 @@ public class App {
 			lname = inputReader.nextLine();
 
 			actortest = new ActorDAO_Postgres();
-			//actortest.printFilmography("Arnold", "Schwarzenegger");
-			actortest.printFilmography(fname, lname);
-					
+			actortest.printFilmography("Arnold", "Schwarzenegger");
+			//actortest.printFilmography(fname, lname);
+
 			CreateMenu();
 			break;
 		case 4:
@@ -122,20 +132,22 @@ public class App {
 			title = inputReader.nextLine();
 
 			movietest = new MovieDAO_Postgres();
-			//movietest.printCast("Terminator Salvation");
-			movietest.printCast(title);
-					
+			movietest.printCast("Terminator Salvation");
+			//movietest.printCast(title);
+
 			CreateMenu();
 			break;
 		case 5:
 
 			inputReader.close();
+			DAOManager.getInstance().closeDBConnection();
+
 			System.out.println("Goodbye");
 
 			break;
 		default:
 
-			CreateMenu();			
+			CreateMenu();
 			break;
 		}
 

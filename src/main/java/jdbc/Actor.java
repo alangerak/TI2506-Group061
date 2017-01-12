@@ -25,7 +25,7 @@ public class Actor {
 	private String gender;
 	
 	/** The number. */
-	private int number;
+	private Integer number;
 	
 	/** The aka names. */
 	private Set<Aka_name> aka_names;
@@ -133,7 +133,7 @@ public class Actor {
 	 *
 	 * @return the number
 	 */
-	public int getNumber() {
+	public Integer getNumber() {
 		return number;
 	}
 
@@ -143,7 +143,7 @@ public class Actor {
 	 * @param number
 	 *            the new number
 	 */
-	public void setNumber(int number) {
+	public void setNumber(Integer number) {
 		this.number = number;
 	}
 
@@ -168,12 +168,6 @@ public class Actor {
 	 */
 	public void setAka_names(Set<Aka_name> aka_names) {
 		this.aka_names = aka_names;
-	}
-	
-	//Debugging String maybe?
-	public void printActorObject(){
-		System.out.format("%10d%20s%15s%30s%20s%15d", id, fname, lname, mname, gender,number);
-		System.out.print("\n");
 	}
 
 }

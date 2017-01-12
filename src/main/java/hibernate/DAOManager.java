@@ -5,14 +5,17 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 /**
- * The DAOManager sets up and maintains a connection to the Postgres database
- *
+ * The DAOManager sets up and maintains a connection to the Postgres database.
  */
 public class DAOManager {
 
+	/** The instance. */
 	private static DAOManager instance = null;
+	
+	/** The manager. */
 	private static EntityManager manager = null;
 
+	/** The Constant entityManagerFactory. */
 	private static final EntityManagerFactory entityManagerFactory = Persistence
 			.createEntityManagerFactory("Hibernate.jbaIMDB");
 
@@ -20,8 +23,8 @@ public class DAOManager {
 	}
 
 	/**
-	 * Get the DAOManager
-	 * 
+	 * Get the DAOManager.
+	 *
 	 * @return the DAOManager
 	 */
 	public static DAOManager getInstance() {
@@ -49,7 +52,9 @@ public class DAOManager {
 	 * no longer needed in the future.
 	 */
 	public void closeDBConnection() {
-		manager.close();
+		if(manager!=null){
+			manager.close();
+		}
 		entityManagerFactory.close();
 	}
 

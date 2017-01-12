@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.Year;
 import java.util.HashSet;
 
 /**
@@ -63,7 +62,7 @@ public class MovieDAO_Postgres implements MovieDAO {
 		while (rs.next()) {
 			movie.setId(rs.getInt("idmovies"));
 			movie.setTitle(rs.getString("title"));
-			movie.setYear(Year.of(rs.getInt("year")));
+			movie.setYear(rs.getInt("year"));
 			movie.setLocation(rs.getString("location"));
 			movie.setLanguage(rs.getString("language"));
 
@@ -96,7 +95,7 @@ public class MovieDAO_Postgres implements MovieDAO {
 			Aka_title aka_title = new Aka_title();
 			aka_title.setId(rs.getInt("idaka_titles"));
 			aka_title.setTitle(rs.getString("title"));
-			aka_title.setYear(Year.of(rs.getInt("year")));
+			aka_title.setYear(rs.getInt("year"));
 			aka_title.setLocation(rs.getString("location"));
 
 			movie.addAka_title(aka_title);

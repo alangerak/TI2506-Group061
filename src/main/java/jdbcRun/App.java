@@ -1,6 +1,16 @@
-package hibernate;
+package jdbcRun;
 
 import java.util.Scanner;
+
+import jdbc.Actor;
+import jdbc.ActorDAO;
+import jdbc.ActorDAO_Postgres;
+import jdbc.Aka_name;
+import jdbc.Aka_title;
+import jdbc.Genre;
+import jdbc.Movie;
+import jdbc.MovieDAO;
+import jdbc.MovieDAO_Postgres;
 
 public class App {
 
@@ -48,14 +58,14 @@ public class App {
 				System.out.println("---------- Actor -----------");
 				System.out.format("%10s%20s%15s%30s%20s%15s", "ID", "Fname", "Lname", " Mname", "Gender", "Number \n");
 
-				resultActor.printActorObject();
+				PrintObjects.printActorObject(resultActor);
 
 				System.out.println();
 
 				System.out.println("---------- Aka names -----------");
 				System.out.format("%10s%60s", "ID", "Name \n");
 				for (Aka_name resultAka_name : resultActor.getAka_names()) {
-					resultAka_name.printAka_nameObject();
+					PrintObjects.printAka_nameObject(resultAka_name);
 				}
 
 				System.out.println();
@@ -68,8 +78,8 @@ public class App {
 			String title = inputReader.nextLine();
 
 			MovieDAO movietest = new MovieDAO_Postgres();
-			// Movie resultMovie = movietest.getMovie("A Different World");
-			Movie resultMovie = movietest.getMovie(title);
+			Movie resultMovie = movietest.getMovie("A Different World");
+			// Movie resultMovie = movietest.getMovie(title);
 
 			if (resultMovie == null) {
 				System.out.println();
@@ -80,15 +90,14 @@ public class App {
 				System.out.println("---------- Movie -----------");
 				System.out.format("%10s%60s%15s%15s%20s%20s", "ID", "Title", "Year", " Number", "Location",
 						"Language \n");
-				resultMovie.printMovieObject();
+				PrintObjects.printMovieObject(resultMovie);
 
 				System.out.println();
 
 				System.out.println("---------- Aka titles -----------");
 				System.out.format("%10s%60s%15s%20s", "ID", "Title", "Year", "Location \n");
 				for (Aka_title resultAka_title : resultMovie.getAka_titles()) {
-
-					// resultAka_title.printAka_titleObject();
+					PrintObjects.printAka_titleObject(resultAka_title);
 				}
 
 				System.out.println();
@@ -96,8 +105,7 @@ public class App {
 				System.out.println("---------- Genres -----------");
 				System.out.format("%10s%60s", "ID", "Genre \n");
 				for (Genre resultGenre : resultMovie.getGenres()) {
-
-					// resultGenre.printGenreObject();
+					PrintObjects.printGenreObject(resultGenre);
 				}
 
 				System.out.println();
@@ -112,8 +120,8 @@ public class App {
 			lname = inputReader.nextLine();
 
 			actortest = new ActorDAO_Postgres();
-			// actortest.printFilmography("Arnold", "Schwarzenegger");
-			actortest.printFilmography(fname, lname);
+			actortest.printFilmography("Arnold", "Schwarzenegger");
+			//actortest.printFilmography(fname, lname);
 
 			CreateMenu();
 			break;
@@ -123,16 +131,14 @@ public class App {
 			title = inputReader.nextLine();
 
 			movietest = new MovieDAO_Postgres();
-			// movietest.printCast("Terminator Salvation");
-			movietest.printCast(title);
+			movietest.printCast("Terminator Salvation");
+			//movietest.printCast(title);
 
 			CreateMenu();
 			break;
 		case 5:
 
 			inputReader.close();
-			DAOManager.getInstance().closeDBConnection();
-
 			System.out.println("Goodbye");
 
 			break;

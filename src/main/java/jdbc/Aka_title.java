@@ -1,7 +1,5 @@
 package jdbc;
 
-import java.time.Year;
-
 /**
  * The Class Aka_title.
  */
@@ -17,7 +15,7 @@ public class Aka_title {
 	private String location;
 	
 	/** The year. */
-	private Year year;
+	private Integer year;
 
 	public Aka_title() {
 	}
@@ -84,7 +82,7 @@ public class Aka_title {
 	 *
 	 * @return the year
 	 */
-	public Year getYear() {
+	public Integer getYear() {
 		return year;
 	}
 
@@ -94,14 +92,8 @@ public class Aka_title {
 	 * @param year
 	 *            the new year
 	 */
-	public void setYear(Year year) {
+	public void setYear(Integer year) {
 		this.year = year;
-	}
-	
-	//Debugging String maybe?
-	public void printAka_titleObject(){
-		System.out.format("%10d%60s%15s%20s", id, title, year.toString(), location);
-		System.out.print("\n");
 	}
 
 }

@@ -1,6 +1,5 @@
 package jdbc;
 
-import java.time.Year;
 import java.util.Set;
 
 /**
@@ -15,10 +14,10 @@ public class Movie {
 	private String title;
 	
 	/** The year. */
-	private Year year;
+	private Integer year;
 	
 	/** The number. */
-	private int number;
+	private Integer number;
 
 	/** The location. */
 	private String location;
@@ -78,7 +77,7 @@ public class Movie {
 	 *
 	 * @return the year
 	 */
-	public Year getYear() {
+	public Integer getYear() {
 		return year;
 	}
 
@@ -88,7 +87,7 @@ public class Movie {
 	 * @param year
 	 *            the new year
 	 */
-	public void setYear(Year year) {
+	public void setYear(Integer year) {
 		this.year = year;
 	}
 
@@ -97,7 +96,7 @@ public class Movie {
 	 *
 	 * @return the number
 	 */
-	public int getNumber() {
+	public Integer getNumber() {
 		return number;
 	}
 
@@ -107,7 +106,7 @@ public class Movie {
 	 * @param number
 	 *            the new number
 	 */
-	public void setNumber(int number) {
+	public void setNumber(Integer number) {
 		this.number = number;
 	}
 
@@ -194,11 +193,4 @@ public class Movie {
 	public void setAka_titles(Set<Aka_title> aka_titles) {
 		this.aka_titles = aka_titles;
 	}
-	
-	//Debugging String maybe?
-	public void printMovieObject(){
-		System.out.format("%10d%60s%15s%15d%20s%20s", id, title, year.toString(), number, location,language);
-		System.out.print("\n");
-	}
-
 }
