@@ -1,8 +1,12 @@
 package hibernate;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -27,9 +31,12 @@ public class Actor {
 	
 	@Column(name = "number")	
 	private Integer number;
+
+	@OneToMany(mappedBy = "actor")
+	private Set<Aka_name> aka_names;
 	
-//	private Set<Aka_name> aka_names;
-//	private Set<Acted_in> acted_in;
+	@OneToMany(mappedBy = "actor", fetch=FetchType.LAZY)
+	private Set<Acted_in> acted_in;
 
 	public Actor() {
 	}
@@ -82,21 +89,21 @@ public class Actor {
 		this.number = number;
 	}
 
-//	public Set<Aka_name> getAka_names() {
-//		return aka_names;
-//	}
-//
-//	public void setAka_names(Set<Aka_name> aka_names) {
-//		this.aka_names = aka_names;
-//	}
-//
-//	public Set<Acted_in> getActed_in() {
-//		return acted_in;
-//	}
-//
-//	public void setActed_in(Set<Acted_in> acted_in) {
-//		this.acted_in = acted_in;
-//	}
+	public Set<Aka_name> getAka_names() {
+		return aka_names;
+	}
+
+	public void setAka_names(Set<Aka_name> aka_names) {
+		this.aka_names = aka_names;
+	}
+
+	public Set<Acted_in> getActed_in() {
+		return acted_in;
+	}
+
+	public void setActed_in(Set<Acted_in> acted_in) {
+		this.acted_in = acted_in;
+	}
 	
 	//Debugging String maybe?
 	public void printActorObject(){

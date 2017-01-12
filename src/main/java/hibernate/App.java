@@ -36,8 +36,8 @@ public class App {
 			String lname = inputReader.nextLine();
 
 			ActorDAO actortest = new ActorDAO_Postgres();
-			//Actor resultActor = actortest.getActor("Arnold", "Schwarzenegger");
-			Actor resultActor = actortest.getActor(fname, lname);
+			Actor resultActor = actortest.getActor("Arnold", "Schwarzenegger");
+			// Actor resultActor = actortest.getActor(fname, lname);
 
 			if (resultActor == null) {
 				System.out.println();
@@ -54,9 +54,9 @@ public class App {
 
 				System.out.println("---------- Aka names -----------");
 				System.out.format("%10s%60s", "ID", "Name \n");
-				// for (Aka_name resultAka_name : resultActor.getAka_names()) {
-				// resultAka_name.printAka_nameObject();
-				// }
+				for (Aka_name resultAka_name : resultActor.getAka_names()) {
+					resultAka_name.printAka_nameObject();
+				}
 
 				System.out.println();
 			}
@@ -132,7 +132,7 @@ public class App {
 
 			inputReader.close();
 			DAOManager.getInstance().closeDBConnection();
-			
+
 			System.out.println("Goodbye");
 
 			break;

@@ -3,20 +3,52 @@ package hibernate;
 import java.time.Year;
 import java.util.Set;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "movies")
 public class Movie {
 
+	@Id
+	@Column(name = "idmovies" , unique = true)
 	private int id;
+	
+	@Column(name = "title")	
 	private String title;
+	
+	@Column(name = "year")	
 	private Year year;
+	
+	@Column(name = "number")	
 	private int number;
+	
+	@Column(name = "type")	
 	private String type;
+	
+	@Column(name = "location")	
 	private String location;
+	
+	@Column(name = "language")	
 	private String language;
+	
+	@ManyToMany(mappedBy="movies")
 	private Set<Genre> genres;
+	
+	@OneToMany(mappedBy = "movie")	
 	private Set<Aka_title> aka_titles;
+	
+	@OneToMany(mappedBy = "movie", fetch=FetchType.LAZY)	
 	private Set<Acted_in> acted_in;
 	
-	
+
+	public Movie() {
+	}	
 
 	public Set<Acted_in> getActed_in() {
 		return acted_in;
@@ -24,9 +56,6 @@ public class Movie {
 
 	public void setActed_in(Set<Acted_in> acted_in) {
 		this.acted_in = acted_in;
-	}
-
-	public Movie() {
 	}
 
 	public int getId() {

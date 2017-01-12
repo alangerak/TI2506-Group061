@@ -1,11 +1,32 @@
 package hibernate;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "acted_in")
 public class Acted_in {
 
+	@Id
+	@Column(name = "idacted_in" , unique = true)
 	private int id;
+
+	@ManyToOne
+	@JoinColumn(name = "idmovies")
 	private Movie movie;
+	
+	@ManyToOne
+	@JoinColumn(name = "idactors")
 	private Actor actor;
+	
+	@Column(name = "character")
 	private String character;
+	
+	@Column(name = "billing_position")
 	private int billing_position;
 
 	public Acted_in() {
